@@ -12,14 +12,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '2px 4px',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems:"center",
+    padding: '20px',
     margin: "2vh 15vh",
+    //background: theme.palette.primary.main,
     [theme.breakpoints.up('md')]: {
         height: "15vh",
-        width: "80vh"
+        width: "150vh"
     },
     [theme.breakpoints.down('md')]: {
         margin: 0,
@@ -30,14 +32,24 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: 400,
-
+  },
+  avatar: {
+    padding: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: "space-between",
+    background: theme.primaryGradient,
+    color: "white",
+    borderRadius: 10,
+    height: "7vh"
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
+    color: "#fff"
   },
   iconButton: {
-    padding: 10,
+    
   },
   divider: {
     height: 28,
@@ -65,13 +77,15 @@ export default function Header(props) {
                 <IconButton color="inherit" className={classes.iconButton}>
                     <PhotoCameraIcon />
                 </IconButton>
-                <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                >
-                    <Avatar>H</Avatar>
-                </motion.div>
             </form>
+            <motion.div
+                className={classes.avatar}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                <Avatar>H</Avatar>
+                Joni Setiawan
+            </motion.div>
         </Paper>
     );
 }

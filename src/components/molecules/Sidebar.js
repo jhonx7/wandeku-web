@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         padding: 5,
         width: "12vh",
         alignItems: "center",
-        backgroundColor: "#fff",
+        background: theme.primaryGradient
     },
     logo: {
         width: 55,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         cursor: "pointer",
         '&:hover': {
-            boxShadow: '0 1px 9px 1px grey',
+            boxShadow: '0 1px 9px 1px #53D4F1',
             
         },
     },
