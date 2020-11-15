@@ -7,17 +7,22 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
 import 'firebase/firestore'
+import 'firebase/analytics'
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './store/reducers/rootReducer'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createFirestoreInstance, getFirestore } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
-import {fbConfig, rfConfig} from './config/fbConfig'
+import { ThemeProvider } from '@material-ui/core/styles';
+import AuthIsLoaded from './components/AuthIsLoaded';
+import {fbConfig, rfConfig} from './config/fbConfig';
+import theme from './Theme'
 
 
 firebase.initializeApp(fbConfig);
 firebase.firestore().settings({ timestampsInSnapshots: true });
+firebase.analytics();
 
 
 const middlewares = [
@@ -39,9 +44,13 @@ const store = createStore(
         config={rfConfig}
         dispatch={store.dispatch}
         createFirestoreInstance={createFirestoreInstance}>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+          <AuthIsLoaded>
+            <ThemeProvider theme={theme}>
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            </ThemeProvider>
+          </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>,
     document.getElementById('root')
@@ -50,4 +59,4 @@ const store = createStore(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+reportWebVitals();
