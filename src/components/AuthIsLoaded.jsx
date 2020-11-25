@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { useSelector } from 'react-redux'
 import { isLoaded } from 'react-redux-firebase'
 import { Container, CircularProgress } from '@material-ui/core/';
@@ -20,4 +20,4 @@ function AuthIsLoaded({ children }) {
   return children
 }
 
-export default AuthIsLoaded;
+export default memo(AuthIsLoaded);

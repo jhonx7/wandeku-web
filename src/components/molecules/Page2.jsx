@@ -49,7 +49,7 @@ export default function Dashboard({children}) {
       <CssBaseline />
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
       <main className={classes.content}>
-        <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
+        {/* <Header isOpen={isOpen} setIsOpen={setIsOpen}/> */}
         <Container className={classes.container}>
           
           {children}
