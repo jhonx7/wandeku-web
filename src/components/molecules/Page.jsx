@@ -17,6 +17,7 @@ import Drawer from './Drawer';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: "#F4F5F8",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -25,40 +26,39 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   content: {
-    marginTop: '10vh',
     padding: 10,
     display: 'flex',
     flexDirection: "column",
-    height: '100vh',
     overflow: 'auto',
+    height: '89vh',
   },
 }));
 
-export default function Page({ children }) {
+export default function Page(props) {
   const classes = useStyles();
   const [isOpen, setOpen] = React.useState(false);
-
+  const {title} = props;
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <Drawer isOpen={isOpen} setOpen={setOpen} />
-      <AppBar position="fixed" color="transparent">
+      <AppBar position="static" color="white">
         <Toolbar >
           <IconButton onClick={() => setOpen(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <Container className={classes.content}>
+      <main className={classes.content}>
 
-        {children}
+        {props.children}
 
-      </Container>
+      </main>
 
     </div>
   );

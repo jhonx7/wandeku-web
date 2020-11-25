@@ -4,8 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import ProtectedRoute from './components/ProtectedRoute'
-import UnprotectedRoute from './components/UnprotectedRoute'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import UnprotectedRoute from './components/auth/UnprotectedRoute'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
@@ -28,7 +28,10 @@ function App() {
           <ProtectedRoute path="/">
             <Dashboard />
           </ProtectedRoute>
-          <Route path="*">
+          <ProtectedRoute path="/dashboard">
+            <Dashboard />
+          </ProtectedRoute>
+          <Route path="/*">
             <NotFound />
           </Route>
         </Switch>

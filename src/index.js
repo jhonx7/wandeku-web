@@ -15,7 +15,7 @@ import thunk from 'redux-thunk'
 import { createFirestoreInstance, getFirestore } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import { ThemeProvider } from '@material-ui/core/styles';
-import AuthIsLoaded from './components/AuthIsLoaded';
+import AuthIsLoaded from './components/auth/AuthIsLoaded';
 import {fbConfig, rfConfig} from './config/fbConfig';
 import theme from './Theme'
 

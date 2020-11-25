@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
-import { useFirebase , isLoaded} from 'react-redux-firebase';
-import { useSelector } from 'react-redux'
+import { useFirebase } from 'react-redux-firebase';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -40,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const fb = useSelector(state => state.firebase)
   const firebase = useFirebase()
   const [err, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
@@ -60,8 +57,9 @@ export default function SignIn() {
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            firebase.login({email, password}).then(res => console.log(res)).catch(err => {
-              console.log(err)
+            setLoading(true)
+            firebase.login({email, password}).then(() => setLoading(false)).catch(err => {
+              setLoading(false)
               setError(err)
             })
           }}
@@ -102,7 +100,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            {!isLoaded(fb) ? <CircularProgress/> : "Sign In"}
+            {loading ? <CircularProgress color="inherit"/> : "Sign In"}
           </Button>
           <Grid container>
             <Grid item xs>
