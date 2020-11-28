@@ -1,40 +1,42 @@
-import React from 'react'
+import React from 'react';
+import { ProtectedRoute, UnprotectedRoute } from './components';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import ProtectedRoute from './components/auth/ProtectedRoute'
-import UnprotectedRoute from './components/auth/UnprotectedRoute'
-import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
-import Dashboard from './pages/Dashboard'
-import NotFound from './pages/NotFound'
-import PrivacyPolicy from './pages/PrivacyPolicy'
+import {
+  SignIn,
+  SignUp,
+  NotFound,
+  PrivacyPolicy,
+  Dashboard,
+  Products
+} from './pages'
 
 function App() {
   return (
     <Router>
-        <Switch>
-          <UnprotectedRoute path="/login">
-            <SignIn />
-          </UnprotectedRoute>
-          <UnprotectedRoute path="/register">
-            <SignUp />
-          </UnprotectedRoute>
-          <Route path="/privacyPolicy">
-            <PrivacyPolicy />
-          </Route>
-          <ProtectedRoute path="/">
-            <Dashboard />
-          </ProtectedRoute>
-          <ProtectedRoute path="/dashboard">
-            <Dashboard />
-          </ProtectedRoute>
-          <Route path="/*">
-            <NotFound />
-          </Route>
-        </Switch>
+      <Switch>
+        <UnprotectedRoute path="/login">
+          <SignIn />
+        </UnprotectedRoute>
+        <UnprotectedRoute path="/register">
+          <SignUp />
+        </UnprotectedRoute>
+        <Route path="/privacyPolicy">
+          <PrivacyPolicy />
+        </Route>
+        <ProtectedRoute path="/produk">
+          <Products />
+        </ProtectedRoute>
+        <ProtectedRoute path="/">
+          <Dashboard />
+        </ProtectedRoute>
+        <Route path="/*">
+          <NotFound />
+        </Route>
+      </Switch>
     </Router>
   );
 }

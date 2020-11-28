@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
-import Container from '@material-ui/core/Container';
-import Copyright from '../components/atoms/Copyright';
+import {Container} from '@material-ui/core';
+import {Copyright} from '../components';
 
 
 export default () => (

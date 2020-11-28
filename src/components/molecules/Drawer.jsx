@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector } from 'react-redux';
 import { useFirebase } from 'react-redux-firebase';

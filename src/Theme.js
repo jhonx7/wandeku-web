@@ -1,5 +1,5 @@
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core/styles';
-import { green, grey, red } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   primaryGradient: 'linear-gradient(45deg, #683BB2 10%, #53D4F1 90%)',
