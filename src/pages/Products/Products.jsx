@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { withRouter } from "react-router-dom";
 
 import { Page } from '../../components';
+import { Button } from '@material-ui/core';
 
 
 const columns = ["Name", "Company", "City", "State"];
@@ -33,6 +34,7 @@ function Products(props) {
 
     return (
         <Page title="Produk">
+            <Button variant="outlined" color="secondary" href="/addProduct">Tambah Produk</Button>
             <MUIDataTable
                 title={"Employee List"}
                 data={data}

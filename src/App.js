@@ -11,7 +11,8 @@ import {
   NotFound,
   PrivacyPolicy,
   Dashboard,
-  Products
+  Products,
+  AddProduct
 } from './pages'
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <ProtectedRoute path="/produk">
           <Products />
+        </ProtectedRoute>
+        <ProtectedRoute path="/addProduct">
+          <AddProduct/>
         </ProtectedRoute>
         <ProtectedRoute path="/">
           <Dashboard />

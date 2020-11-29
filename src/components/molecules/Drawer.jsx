@@ -66,7 +66,6 @@ function Drawer(props) {
     const classes = useStyles();
     const firebase = useFirebase();
     const profile = useSelector(state => state.firebase.profile);
-
     const { isOpen, setOpen, history } = props;
     const active = clsx(classes.menu, classes.active);
     //const [isOpen, setOpen] = React.useState(false);

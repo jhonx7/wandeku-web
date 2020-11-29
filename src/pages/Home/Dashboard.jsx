@@ -13,7 +13,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import PublishIcon from '@material-ui/icons/Publish';
 import { makeStyles } from '@material-ui/core/styles';
-import { Page } from '../components'
+import { Page } from '../../components'
 
 const useStyles = makeStyles((theme) => ({
     header: {

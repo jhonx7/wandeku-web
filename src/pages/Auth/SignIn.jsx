@@ -3,7 +3,7 @@ import { useFirebase } from 'react-redux-firebase';
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, CircularProgress } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { Copyright } from '../components'
+import { Copyright } from '../../components'
 
 
 const useStyles = makeStyles((theme) => ({

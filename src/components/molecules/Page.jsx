@@ -6,7 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import CachedIcon from '@material-ui/icons/Cached';
 import Drawer from './Drawer';
+import { Badge } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Page(props) {
   const classes = useStyles();
   const [isOpen, setOpen] = React.useState(false);
-  const {title} = props;
+  const { title } = props;
+  document.title = "Wandeku | " + title
 
   return (
     <div className={classes.root}>
@@ -49,6 +53,17 @@ export default function Page(props) {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
+
+          <IconButton color="inherit">
+            <Badge badgeContent={1} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+
+          <IconButton color="inherit" onClick={(e)=>console.log(e.value)}>
+            <CachedIcon />
+          </IconButton>
+
         </Toolbar>
       </AppBar>
 
