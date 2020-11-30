@@ -1,7 +1,8 @@
 import React from 'react';
 import MUIDataTable from "mui-datatables";
 import { withRouter } from "react-router-dom";
-
+import { useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
 import { Page } from '../../components';
 import { Button } from '@material-ui/core';
 
@@ -34,7 +35,7 @@ function Products(props) {
 
     return (
         <Page title="Produk">
-            <Button variant="outlined" color="secondary" href="/addProduct">Tambah Produk</Button>
+            <Button variant="outlined" color="secondary" onClick={()=>history.push("/addProduct")}>Tambah Produk</Button>
             <MUIDataTable
                 title={"Employee List"}
                 data={data}

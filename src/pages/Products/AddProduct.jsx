@@ -1,7 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, TextField, MenuItem, Grid } from '@material-ui/core';
+import { Container, TextField, MenuItem, Grid, CircularProgress, Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useFirestore } from 'react-redux-firebase';
 import { Page } from '../../components';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -33,15 +37,20 @@ const currencies = [
     },
 ];
 
-export default function AddProduct() {
+function AddProduct(props) {
     const classes = useStyles();
+    const firestore = useFirestore()
+    useFirestoreConnect(['kategori']) // sync todos collection from Firestore into redux
+    const categories = useSelector((state) => state.firestore.ordered.kategori)
+
+    const { history } = props;
     const [values, setValues] = React.useState({
         nama: '',
-        jumlah: '',
-        kategori: 'EUR',
-        modal: '',
-        jual: '',
-        grosir: '',
+        jumlah: 0,
+        kategori: 'Umum',
+        modal: 0,
+        jual: 0,
+        grosir: 0,
         deskripsi: '',
     });
 
@@ -67,7 +76,8 @@ export default function AddProduct() {
                                 className={classes.margin}
                                 onChange={handleChange('jumlah')}
                             />
-                            <TextField
+
+                            {categories ? <TextField
                                 select
                                 fullWidth
                                 label="Kategori"
@@ -75,12 +85,12 @@ export default function AddProduct() {
                                 value={values.kategori}
                                 onChange={handleChange('kategori')}
                             >
-                                {currencies.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
+                                {categories.map((option) => (
+                                    <MenuItem key={option.nama} value={option.nama}>
+                                        {option.nama}
                                     </MenuItem>
                                 ))}
-                            </TextField>
+                            </TextField> : <CircularProgress />}
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
@@ -112,9 +122,22 @@ export default function AddProduct() {
                         rows={4}
                         variant="outlined"
                     />
+                    <Button 
+                        type="submit"
+                        fullWidth 
+                        variant="outlined" 
+                        color="secondary" 
+                        onClick={() => history.push("/produk")}
+                    >
+                        Tambah
+                    </Button>
+
 
                 </form>
+
             </Container>
         </Page>
     );
 }
+
+export default withRouter(AddProduct)
