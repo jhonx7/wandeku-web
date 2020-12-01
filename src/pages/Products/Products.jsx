@@ -19,7 +19,8 @@ const data = [
 
 function Products(props) {
     const { history } = props;
-
+    useFirestoreConnect(['produk'])
+    const products = useSelector((state) => state.firestore.ordered.produk)
     //const columns = ["ID", "Nama", "Username", "Email", "NIK", "NIP", "No HP", "Role"];
 
     const options = {

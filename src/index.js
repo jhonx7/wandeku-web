@@ -9,7 +9,7 @@ import 'firebase/functions'
 import 'firebase/firestore'
 import 'firebase/analytics'
 import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from './store/reducers/rootReducer'
+import {rootReducer} from './store'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createFirestoreInstance, getFirestore } from 'redux-firestore';

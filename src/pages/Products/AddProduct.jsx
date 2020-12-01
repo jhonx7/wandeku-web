@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, TextField, MenuItem, Grid, CircularProgress, Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
-import { useFirestore } from 'react-redux-firebase';
 import { Page } from '../../components';
 import { withRouter } from 'react-router-dom';
+import {signIn} from '../../store'
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -18,29 +18,11 @@ const useStyles = makeStyles((theme) => ({
         width: '25ch',
     },
 }));
-const currencies = [
-    {
-        value: 'USD',
-        label: '$',
-    },
-    {
-        value: 'EUR',
-        label: '€',
-    },
-    {
-        value: 'BTC',
-        label: '฿',
-    },
-    {
-        value: 'JPY',
-        label: '¥',
-    },
-];
+
 
 function AddProduct(props) {
     const classes = useStyles();
-    const firestore = useFirestore()
-    useFirestoreConnect(['kategori']) // sync todos collection from Firestore into redux
+    useFirestoreConnect(['kategori'])
     const categories = useSelector((state) => state.firestore.ordered.kategori)
 
     const { history } = props;
@@ -58,10 +40,16 @@ function AddProduct(props) {
         setValues({ ...values, [prop]: event.target.value });
     };
 
+    const handleSubmit = () => {
+        
+    }
+
     return (
         <Page title="Tambah Produk">
             <Container>
-                <form noValidate autoComplete="off">
+                <form noValidate autoComplete="off" 
+                    onSubmit
+                >
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={6}>
                             <TextField
