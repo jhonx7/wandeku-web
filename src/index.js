@@ -12,7 +12,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import {rootReducer} from './store'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import { createFirestoreInstance, getFirestore } from 'redux-firestore';
+import { createFirestoreInstance, getFirestore, reduxFirestore } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import { ThemeProvider } from '@material-ui/core/styles';
 import AuthIsLoaded from './components/auth/AuthIsLoaded';
@@ -32,6 +32,7 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(...middlewares),
+    reduxFirestore(firebase)
   )
 )
 

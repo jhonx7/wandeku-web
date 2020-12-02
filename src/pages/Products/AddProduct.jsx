@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, TextField, MenuItem, Grid, CircularProgress, Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { Container, TextField, MenuItem, Grid, Button } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
-import { Page } from '../../components';
+import { Page, Loading } from '../../components';
 import { withRouter } from 'react-router-dom';
-import {signIn} from '../../store'
+import { addProduct } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -22,17 +22,20 @@ const useStyles = makeStyles((theme) => ({
 
 function AddProduct(props) {
     const classes = useStyles();
-    useFirestoreConnect(['kategori'])
+    const dispatch = useDispatch();
+    useFirestoreConnect([{
+        collection: 'kategori',
+        where: [['for', '==', 'barang']],
+      }])
     const categories = useSelector((state) => state.firestore.ordered.kategori)
-
     const { history } = props;
     const [values, setValues] = React.useState({
-        nama: '',
-        jumlah: 0,
+        namaProduk: '',
+        stok: 0,
         kategori: 'Umum',
-        modal: 0,
-        jual: 0,
-        grosir: 0,
+        hargaModal: 0,
+        hargaJual: 0,
+        hargaGrosir: 0,
         deskripsi: '',
     });
 
@@ -40,34 +43,42 @@ function AddProduct(props) {
         setValues({ ...values, [prop]: event.target.value });
     };
 
-    const handleSubmit = () => {
-        
+    const handleSubmit = async () => {
+        await dispatch(addProduct(values))
+        await history.push("/produk")
     }
 
     return (
         <Page title="Tambah Produk">
             <Container>
-                <form noValidate autoComplete="off" 
-                    onSubmit
+            {categories ?
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        handleSubmit()
+                    }}
                 >
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={6}>
                             <TextField
                                 fullWidth
+                                required
                                 label="Nama Produk"
                                 className={classes.margin}
-                                onChange={handleChange('nama')}
+                                onChange={handleChange('namaProduk')}
                             />
                             <TextField
                                 fullWidth
+                                required
                                 label="Jumlah Stok"
                                 className={classes.margin}
-                                onChange={handleChange('jumlah')}
+                                onChange={handleChange('stok')}
                             />
 
-                            {categories ? <TextField
+                            <TextField
                                 select
                                 fullWidth
+                                required
                                 label="Kategori"
                                 className={classes.margin}
                                 value={values.kategori}
@@ -78,31 +89,35 @@ function AddProduct(props) {
                                         {option.nama}
                                     </MenuItem>
                                 ))}
-                            </TextField> : <CircularProgress />}
+                            </TextField>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
                                 fullWidth
+                                required
                                 label="Harga Modal"
                                 className={classes.margin}
-                                onChange={handleChange('modal')}
+                                onChange={handleChange('hargaModal')}
                             />
                             <TextField
                                 fullWidth
+                                required
                                 label="Harga Jual"
                                 className={classes.margin}
-                                onChange={handleChange('jual')}
+                                onChange={handleChange('hargaJual')}
                             />
                             <TextField
                                 fullWidth
+                                required
                                 label="Harga Grosir"
                                 className={classes.margin}
-                                onChange={handleChange('grosir')}
+                                onChange={handleChange('hargaGrosir')}
                             />
                         </Grid>
                     </Grid>
                     <TextField
                         fullWidth
+                        required
                         label="Deskripsi"
                         onChange={handleChange('deskripsi')}
                         className={classes.margin}
@@ -110,19 +125,18 @@ function AddProduct(props) {
                         rows={4}
                         variant="outlined"
                     />
-                    <Button 
+                    <Button
                         type="submit"
-                        fullWidth 
-                        variant="outlined" 
-                        color="secondary" 
-                        onClick={() => history.push("/produk")}
+                        fullWidth
+                        variant="outlined"
+                        color="secondary"
                     >
                         Tambah
                     </Button>
 
 
                 </form>
-
+                : <Loading/>}
             </Container>
         </Page>
     );

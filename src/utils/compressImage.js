@@ -1,6 +1,6 @@
 import Compress from "compress.js";
 
-exports.resizeImageFn = (file) => {
+export function resizeImageFn (file) {
 
     Compress.compress([file], {
       size: 2, // the max size in MB, defaults to 2MB

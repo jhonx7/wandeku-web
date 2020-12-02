@@ -12,7 +12,8 @@ import {
   PrivacyPolicy,
   Dashboard,
   Products,
-  AddProduct
+  AddProduct,
+  Services
 } from './pages'
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
         <Route path="/privacyPolicy">
           <PrivacyPolicy />
         </Route>
+        <ProtectedRoute path="/jasa">
+          <Services />
+        </ProtectedRoute>
         <ProtectedRoute path="/produk">
           <Products />
         </ProtectedRoute>

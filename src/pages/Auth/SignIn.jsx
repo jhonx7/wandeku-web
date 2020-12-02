@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useFirebase } from 'react-redux-firebase';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, CircularProgress } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { Copyright } from '../../components'
+import { signIn } from '../../store'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,11 +29,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const firebase = useFirebase()
-  const [err, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
+
+  const [values, setValues] = React.useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -48,11 +56,7 @@ export default function SignIn() {
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            setLoading(true)
-            firebase.login({ email, password }).then(() => setLoading(false)).catch(err => {
-              setLoading(false)
-              setError(err)
-            })
+            dispatch(signIn(values))
           }}
         >
           <TextField
@@ -65,9 +69,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={e => {
-              setEmail(e.target.value)
-            }}
+            onChange={handleChange('email')}
           />
           <TextField
             variant="outlined"
@@ -79,11 +81,9 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={e => {
-              setPassword(e.target.value)
-            }}
+            onChange={handleChange('password')}
           />
-          {err && <Typography variant="caption" color="error">{err.message}</Typography>}
+          {auth.authError && <Typography variant="caption" color="error">{auth.authError}</Typography>}
           <Button
             type="submit"
             fullWidth
@@ -91,7 +91,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            {loading ? <CircularProgress color="inherit" /> : "Sign In"}
+            {auth.isLoading ? <CircularProgress color="inherit" /> : "Sign In"}
           </Button>
           <Grid container>
             <Grid item xs>
