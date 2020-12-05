@@ -50,7 +50,7 @@ export const signUp = (newUser) => {
     const firestore = getFirestore();
 
     dispatch({
-      type: 'SET_LOADING',
+      type: 'AUTH_LOADING',
       loading: true
     })
     

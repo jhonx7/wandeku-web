@@ -12,7 +12,6 @@ export const addService = (jasa) => {
 
         firestore.collection('jasa').add({
             jasa: jasa.jasa,
-            pelanggan: jasa.pelanggan,
             kategori: jasa.kategori,
             biaya: jasa.biaya,
             status: jasa.status,

@@ -6,7 +6,7 @@ export const addProduct = (produk) => {
         const firestore = getFirestore();
 
         dispatch({
-            type: 'PRODUCT_LOADING',
+            type: 'SET_LOADING',
             loading: true
         })
 

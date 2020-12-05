@@ -13,7 +13,8 @@ import {
   Dashboard,
   Products,
   AddProduct,
-  Services
+  Services,
+  AddService
 } from './pages'
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <ProtectedRoute path="/jasa">
           <Services />
+        </ProtectedRoute>
+        <ProtectedRoute path="/addService">
+          <AddService />
         </ProtectedRoute>
         <ProtectedRoute path="/produk">
           <Products />

@@ -5,30 +5,15 @@ const initState = {
         'batal',
         'ambil',
     ],
-    error: null,
-    isLoading: false
+    sevice: [],
 }
 
-const jasaReducer = (state = initState, action) => {
+const serviceReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'ADD_ERROR':
+        case 'FETCH_SERVICE':
             return {
                 ...state,
-                isLoading: action.loading,
-                error: action.err.message
-            }
-
-        case 'ADD_SUCCESS':
-            return {
-                ...state,
-                isLoading: action.loading,
-                error: null
-            }
-
-        case 'SERVICE_LOADING':
-            return {
-                ...state,
-                isLoading: action.loading
+                service: action.sevice
             }
 
         default:
@@ -37,4 +22,4 @@ const jasaReducer = (state = initState, action) => {
     }
 };
 
-export default jasaReducer;
+export default serviceReducer;

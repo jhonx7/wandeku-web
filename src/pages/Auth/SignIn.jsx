@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const auth = useSelector((state) => state.auth)
+  const {authError, isLoading} = useSelector((state) => state.auth)
 
   const [values, setValues] = React.useState({
     email: '',
@@ -83,7 +83,7 @@ export default function SignIn() {
             autoComplete="current-password"
             onChange={handleChange('password')}
           />
-          {auth.authError && <Typography variant="caption" color="error">{auth.authError}</Typography>}
+          {authError && <Typography variant="caption" color="error">{authError}</Typography>}
           <Button
             type="submit"
             fullWidth
@@ -91,7 +91,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            {auth.isLoading ? <CircularProgress color="inherit" /> : "Sign In"}
+            {isLoading ? <CircularProgress color="inherit" /> : "Sign In"}
           </Button>
           <Grid container>
             <Grid item xs>

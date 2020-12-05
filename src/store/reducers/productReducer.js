@@ -1,30 +1,15 @@
 const initState = {
-    error: null,
-    isLoading: false
+    product: []
 }
 
 const productReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'ADD_ERROR':
+        case 'FETCH_PRODUCT':
             return {
                 ...state,
                 isLoading: action.loading,
-                error: action.err.message
+                product: action.product
             }
-
-        case 'ADD_SUCCESS':
-            return {
-                ...state,
-                isLoading: action.loading,
-                error: null
-            }
-
-        case 'PRODUCT_LOADING':
-            return {
-                ...state,
-                isLoading: action.loading
-            }
-
         default:
             return state
             

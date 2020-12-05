@@ -35,7 +35,7 @@ const authReducer = (state = initState, action) => {
         isLoading: action.loading,
         authError: action.err.message
       }
-    case 'SET_LOADING':
+    case 'AUTH_LOADING':
       return {
         ...state,
         isLoading: action.loading
