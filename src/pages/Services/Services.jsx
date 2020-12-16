@@ -27,10 +27,7 @@ const columns = [
         name: "kategori",
         label: "Kategori",
     },
-    {
-        name: "deskripsi",
-        label: "Deskripsi",
-    },
+
     {
         name: "biaya",
         label: "Biaya",
@@ -39,7 +36,10 @@ const columns = [
         name: "status",
         label: "Status",
     },
-    
+    {
+        name: "deskripsi",
+        label: "Deskripsi",
+},  
 ];
 
 const populates = [

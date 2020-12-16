@@ -4,7 +4,7 @@ import { Container, TextField, MenuItem, Grid, Button, IconButton } from '@mater
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
-import { Page, Loading } from '../../components';
+import { Page, Loading, CustomerModal, CategoryModal } from '../../components';
 import { withRouter } from 'react-router-dom';
 import { addService } from '../../store';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         width: '25ch',
     },
-    pelanggan: {
+    withButton: {
         display: 'flex',
         flexDirection: 'row'
     }
@@ -38,9 +38,10 @@ function AddService(props) {
     ])
     const customer = useSelector((state) => state.firestore.ordered.pelanggan)
     const categories = useSelector((state) => state.firestore.ordered.kategori)
-    const { status } = useSelector((state) => state.service)
 
     const { history } = props;
+    const [openCustomer, setOpenCustomer] = React.useState(false);
+    const [openCategory, setOpenCategory] = React.useState(false);
     const [values, setValues] = React.useState({
         jasa: '',
         pelanggan: '',
@@ -61,6 +62,8 @@ function AddService(props) {
 
     return (
         <Page title="Tambah Jasa">
+            <CustomerModal open={openCustomer} setOpen={setOpenCustomer} />
+            <CategoryModal open={openCategory} setOpen={setOpenCategory} jenis='jasa' />
             <Container>
                 {customer && categories ?
                     <form
@@ -78,7 +81,7 @@ function AddService(props) {
                                     className={classes.margin}
                                     onChange={handleChange('jasa')}
                                 />
-                                <div className={classes.pelanggan}>
+                                <div className={classes.withButton}>
                                     <TextField
                                         select
                                         fullWidth
@@ -94,34 +97,36 @@ function AddService(props) {
                                             </MenuItem>
                                         ))}
                                     </TextField>
-                                    <IconButton color="primary" ><AddCircleOutlinedIcon fontSize="large"/></IconButton>
+                                    <IconButton color="primary" onClick={() => setOpenCustomer(true)}><AddCircleOutlinedIcon fontSize="large" /></IconButton>
                                 </div>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField
-                                    select
                                     fullWidth
                                     required
-                                    label="Kategori"
-                                    className={classes.margin}
-                                    value={values.kategori}
-                                    onChange={handleChange('kategori')}
-                                >
-                                    {categories.map((option) => (
-                                        <MenuItem key={option.nama} value={option.nama}>
-                                            {option.nama}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-
-                                <TextField
-                                    fullWidth
-                                    required
+                                    defaultValue={'0'}
                                     label="Biaya"
                                     className={classes.margin}
                                     onChange={handleChange('biaya')}
                                 />
-
+                                <div className={classes.withButton}>
+                                    <TextField
+                                        select
+                                        fullWidth
+                                        required
+                                        label="Kategori"
+                                        className={classes.margin}
+                                        value={values.kategori}
+                                        onChange={handleChange('kategori')}
+                                    >
+                                        {categories.map((option) => (
+                                            <MenuItem key={option.nama} value={option.nama}>
+                                                {option.nama}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                    <IconButton color="primary" onClick={() => setOpenCategory(true)}><AddCircleOutlinedIcon fontSize="large" /></IconButton>
+                                </div>
 
                             </Grid>
                         </Grid>
@@ -145,7 +150,7 @@ function AddService(props) {
                     </Button>
 
 
-                    </form>: <Loading />
+                    </form> : <Loading />
                 }
             </Container>
         </Page>

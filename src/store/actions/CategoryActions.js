@@ -1,4 +1,4 @@
-export const addCustomer = (pelanggan) => {
+export const addCategory = (kategori) => {
     return (dispatch, getState, {
         getFirebase,
         getFirestore
@@ -10,10 +10,9 @@ export const addCustomer = (pelanggan) => {
             loading: true
         })
 
-        firestore.collection('pelanggan').add({
-            nama: pelanggan.namaPelanggan,
-            noHp: pelanggan.noHp,
-            alamat: pelanggan.alamat,
+        firestore.collection('kategori').add({
+            nama: kategori.nama,
+            for: kategori.for,
         })
         .then(() => {
             dispatch({
