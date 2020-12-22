@@ -14,7 +14,8 @@ import {
   Products,
   AddProduct,
   Services,
-  AddService
+  AddService,
+  EditService
 } from './pages'
 
 function App() {
@@ -30,12 +31,16 @@ function App() {
         <Route path="/privacyPolicy">
           <PrivacyPolicy />
         </Route>
+        <ProtectedRoute path="/jasa/:id">
+          <EditService />
+        </ProtectedRoute>
         <ProtectedRoute path="/jasa">
           <Services />
         </ProtectedRoute>
         <ProtectedRoute path="/addService">
           <AddService />
         </ProtectedRoute>
+        
         <ProtectedRoute path="/produk">
           <Products />
         </ProtectedRoute>
@@ -45,7 +50,10 @@ function App() {
         <ProtectedRoute path="/">
           <Dashboard />
         </ProtectedRoute>
-        <Route path="/*">
+        <Route path="/notfound">
+          <NotFound />
+        </Route>
+        <Route path="*">
           <NotFound />
         </Route>
       </Switch>
