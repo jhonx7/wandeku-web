@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useFirestoreConnect, populate } from 'react-redux-firebase';
 import { Loading, Page } from '../../components';
 import { Button } from '@material-ui/core';
+import { convertToRupiah } from '../../utils';
 
 
 const columns = [
@@ -31,6 +32,12 @@ const columns = [
     {
         name: "biaya",
         label: "Biaya",
+        options: {
+            filter: false,
+            customBodyRender: (value, tableMeta, updateValue) => {
+                return convertToRupiah(value)
+            }
+        }
     },
     {
         name: "status",
@@ -64,7 +71,7 @@ function Products(props) {
         onRowClick: (rowData) => {
             let id = rowData[0]
             return history.push("/jasa/" + id);
-        }
+        },
     };
 
     return (

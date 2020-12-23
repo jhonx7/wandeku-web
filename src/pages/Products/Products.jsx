@@ -3,9 +3,12 @@ import MUIDataTable from "mui-datatables";
 import { withRouter } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Button, IconButton } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Loading, Page } from '../../components';
 import { convertToRupiah } from '../../utils';
+import { deleteService } from '../../store';
+
 
 
 const columns = [
@@ -22,7 +25,7 @@ const columns = [
         options:{
             filter: false,
             customBodyRender: (value, tableMeta, updateValue) => {
-                return <Avatar alt="Produk" variant="rounded" src={value ? value : null} />
+                return <Avatar alt="Produk" variant="rounded" src={value} />
             }
         }
     },
@@ -70,13 +73,24 @@ const columns = [
             }
         }
     },
+    {
+        name: "id",
+        label: "Action",
+        options: {
+            filter: false,
+            //display: false,
+            customBodyRender: (value, tableMeta, updateValue) => {
+                return <IconButton aria-label="delete" onClick={()=>deleteService(value)}><DeleteIcon /></IconButton>
+            }
+        }
+    },
 
 ];
 
 
 function Products(props) {
     const { history } = props;
-    useFirestoreConnect(['barang'])
+    useFirestoreConnect([{ collection: 'barang' }])
     const products = useSelector((state) => state.firestore.ordered.barang)
     console.log(products);
     const options = {

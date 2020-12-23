@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { Page, Loading, CustomerModal, CategoryModal } from '../../components';
 import { withRouter, useParams, Redirect } from 'react-router-dom';
-import { addService } from '../../store';
+import { editService } from '../../store';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +48,7 @@ function EditService(props) {
         jasa: '',
         pelanggan: '',
         kategori: '',
-        status: 'terima',
+        status: '',
         biaya: 0,
         deskripsi: '',
     });
@@ -58,7 +58,7 @@ function EditService(props) {
     };
 
     const handleSubmit = () => {
-        dispatch(addService(values))
+        dispatch(editService(values))
         history.push("/jasa")
     }
 
