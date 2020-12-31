@@ -90,9 +90,13 @@ const columns = [
 
 function Products(props) {
     const { history } = props;
-    useFirestoreConnect([{ collection: 'barang' }])
+    const {toko} = useSelector(state => state.firebase.profile);
+    useFirestoreConnect([
+        { collection: 'barang', where: [['toko', '==', 'G5m9fkbFQVxhLtWE8Rgt']],}
+    ])
     const products = useSelector((state) => state.firestore.ordered.barang)
     console.log(products);
+
     const options = {
         serverSide: true,
         filterType: "dropdown",

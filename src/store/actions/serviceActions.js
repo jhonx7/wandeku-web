@@ -4,6 +4,7 @@ export const addService = (jasa) => {
         getFirestore
       }) => {
         const firestore = getFirestore();
+        const toko = getState().firebase.profile.toko;
 
         dispatch({
             type: 'SET_LOADING',
@@ -20,6 +21,7 @@ export const addService = (jasa) => {
             pj:'',
             modal: '',
             addons: [],
+            toko
         })
         .then(() => {
             dispatch({
@@ -49,12 +51,8 @@ export const editService = (jasa) => {
         })
 
         firestore.collection('jasa').doc(jasa.id).set({
-            jasa: jasa.jasa,
-            pelanggan: jasa.pelanggan,
-            kategori: jasa.kategori,
             biaya: jasa.biaya,
             status: jasa.status,
-            deskripsi: jasa.deskripsi,
             pj:jasa.pj,
             modal: jasa.modal,
             addons: jasa.addons,

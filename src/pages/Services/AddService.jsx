@@ -127,7 +127,6 @@ function AddService(props) {
                                     </TextField>
                                     <IconButton color="primary" onClick={() => setOpenCategory(true)}><AddCircleOutlinedIcon fontSize="large" /></IconButton>
                                 </div>
-
                             </Grid>
                         </Grid>
                         <TextField

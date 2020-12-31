@@ -62,7 +62,7 @@ function EditService(props) {
         history.push("/jasa")
     }
 
-    if (!id) {
+    if (!services) {
         return <Redirect
             to={{
                 pathname: "/notfound",
@@ -71,7 +71,7 @@ function EditService(props) {
     }
 
     return (
-        <Page title="Edit Jasa">
+        <Page title="Detail Jasa">
             <CustomerModal open={openCustomer} setOpen={setOpenCustomer} />
             <CategoryModal open={openCategory} setOpen={setOpenCategory} jenis='jasa' />
             <Container>

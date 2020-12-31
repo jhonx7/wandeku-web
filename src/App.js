@@ -15,13 +15,16 @@ import {
   AddProduct,
   Services,
   AddService,
-  EditService
+  DetailService
 } from './pages'
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/notfound">
+          <NotFound />
+        </Route>
         <UnprotectedRoute path="/login">
           <SignIn />
         </UnprotectedRoute>
@@ -32,7 +35,7 @@ function App() {
           <PrivacyPolicy />
         </Route>
         <ProtectedRoute path="/jasa/:id">
-          <EditService />
+          <DetailService />
         </ProtectedRoute>
         <ProtectedRoute path="/jasa">
           <Services />

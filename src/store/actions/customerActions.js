@@ -4,6 +4,7 @@ export const addCustomer = (pelanggan) => {
         getFirestore
       }) => {
         const firestore = getFirestore();
+        const toko = getState().firebase.profile.toko;
 
         dispatch({
             type: 'SET_LOADING',
@@ -14,6 +15,7 @@ export const addCustomer = (pelanggan) => {
             nama: pelanggan.namaPelanggan,
             noHp: pelanggan.noHp,
             alamat: pelanggan.alamat,
+            toko
         })
         .then(() => {
             dispatch({

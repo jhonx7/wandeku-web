@@ -4,6 +4,7 @@ export const addCategory = (kategori) => {
         getFirestore
       }) => {
         const firestore = getFirestore();
+        const toko = getState().firebase.profile.toko;
 
         dispatch({
             type: 'SET_LOADING',
@@ -13,6 +14,7 @@ export const addCategory = (kategori) => {
         firestore.collection('kategori').add({
             nama: kategori.nama,
             for: kategori.for,
+            toko
         })
         .then(() => {
             dispatch({

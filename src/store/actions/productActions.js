@@ -4,6 +4,7 @@ export const addProduct = (produk) => {
         getFirestore
       }) => {
         const firestore = getFirestore();
+        const toko = getState().firebase.profile.toko;
 
         dispatch({
             type: 'SET_LOADING',
@@ -18,6 +19,7 @@ export const addProduct = (produk) => {
             hargaJual: produk.hargaJual,
             hargaGrosir: produk.hargaGrosir,
             deskripsi: produk.deskripsi,
+            toko
         })
         .then(() => {
             dispatch({
