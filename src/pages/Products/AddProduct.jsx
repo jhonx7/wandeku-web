@@ -111,17 +111,19 @@ function AddProduct(props) {
                                 <TextField
                                     fullWidth
                                     required
-                                    label="Harga Jual"
-                                    className={classes.margin}
-                                    onChange={handleChange('hargaJual')}
-                                />
-                                <TextField
-                                    fullWidth
-                                    required
                                     label="Harga Grosir"
                                     className={classes.margin}
                                     onChange={handleChange('hargaGrosir')}
                                 />
+                                
+                                <TextField
+                                    fullWidth
+                                    required
+                                    label="Harga Jual"
+                                    className={classes.margin}
+                                    onChange={handleChange('hargaJual')}
+                                />
+                                
                             </Grid>
                         </Grid>
                         <TextField
