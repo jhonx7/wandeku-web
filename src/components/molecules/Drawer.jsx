@@ -87,7 +87,7 @@ function Drawer(props) {
                     <Container className={classes.profile}>
                         <Avatar className={classes.avatar}>{profile.initial}</Avatar>
                         <div className={classes.name}>
-                            <Typography variant="body1">{profile.firstName+' '+profile.lastName}</Typography>
+                            <Typography variant="body1">{profile.name}</Typography>
                             <Divider />
                             <Typography variant="caption">{profile.role}</Typography>
                         </div>

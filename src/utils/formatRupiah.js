@@ -1,4 +1,4 @@
-export function convertToRupiah(angka) {
+exports.convertToRupiah = (angka) => {
     var rupiah = '';
     var angkarev = angka.split('').reverse().join('');
     for (var i = 0; i < angkarev.length; i++)
@@ -10,7 +10,7 @@ export function convertToRupiah(angka) {
  * alert(convertToRupiah(10000000)); -> "Rp. 10.000.000"
  */
 
-export function convertToAngka(rupiah) {
+exports.convertToAngka = (rupiah) => {
     return parseInt(rupiah.replace(/,.*|[^0-9]/g, ''), 10);
 }
 /**

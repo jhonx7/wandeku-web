@@ -15,7 +15,8 @@ import {
   AddProduct,
   Services,
   AddService,
-  DetailService
+  DetailService,
+  ListEmployees
 } from './pages'
 
 function App() {
@@ -50,6 +51,11 @@ function App() {
         <ProtectedRoute path="/addProduct">
           <AddProduct/>
         </ProtectedRoute>
+
+        <ProtectedRoute path="/pegawai">
+          <ListEmployees />
+        </ProtectedRoute>
+
         <ProtectedRoute path="/">
           <Dashboard />
         </ProtectedRoute>
