@@ -35,6 +35,16 @@ const authReducer = (state = initState, action) => {
         isLoading: action.loading,
         authError: action.err.message
       }
+    case 'DELETE_SUCCESS':
+      return {
+        ...state,
+        authError: null,
+      }
+    case 'DELETE_ERROR':
+      return {
+        ...state,
+        authError: action.err.message
+      }
     case 'AUTH_LOADING':
       return {
         ...state,

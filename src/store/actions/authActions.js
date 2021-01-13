@@ -59,12 +59,12 @@ export const signUp = (newUser) => {
       newUser.password
     ).then(resp => {
       return firestore.collection('users').doc(resp.user.uid).set({
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
+        name: newUser.firstName+' '+newUser.lastName,
         initials: newUser.firstName[0] + newUser.lastName[0],
         address: newUser.address,
         phoneNumber: newUser.phoneNumber,
         role: newUser.role,
+        toko: newUser.toko,
       });
     }).then(() => {
       dispatch({
@@ -78,5 +78,25 @@ export const signUp = (newUser) => {
         err
       });
     });
+  }
+}
+
+
+export const deleteUser = (id) => {
+  return (dispatch, getState, {
+    getFirebase
+  }) => {
+    const firebase = getFirebase();
+
+    firebase.auth().deleteUser(id).then(() => {
+      dispatch({
+        type: 'DELETE_SUCCESS'
+      })
+    }).catch((err) => {
+      dispatch({
+          type: 'DELETE_ERROR',
+          err
+      });
+  });
   }
 }
