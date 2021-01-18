@@ -29,11 +29,15 @@ const useStyles = makeStyles((theme) => ({
 function AddService(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const { toko } = useSelector(state => state.firebase.profile);
     useFirestoreConnect([
-        { collection: 'pelanggan', },
+        { collection: 'pelanggan', where: [['toko', '==', toko ? toko : '']]},
         {
             collection: 'kategori',
-            where: [['for', '==', 'jasa']],
+            where: [
+                ['toko', '==', toko ? toko : ''],
+                ['for', '==', 'jasa'],
+            ],
         }
     ])
     const customer = useSelector((state) => state.firestore.ordered.pelanggan)
@@ -47,7 +51,7 @@ function AddService(props) {
         pelanggan: '',
         kategori: '',
         status: 'terima',
-        biaya: 0,
+        biaya: '0',
         deskripsi: '',
     });
 

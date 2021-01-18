@@ -1,4 +1,4 @@
-export const addService = (jasa) => {
+export const addPayment = (pembiayaan) => {
     return (dispatch, getState, {
         getFirebase,
         getFirestore
@@ -11,17 +11,11 @@ export const addService = (jasa) => {
             loading: true
         })
 
-        firestore.collection('jasa').add({
-            jasa: jasa.jasa,
-            pelanggan: jasa.pelanggan,
-            kategori: jasa.kategori,
-            biaya: jasa.biaya,
-            status: jasa.status,
-            deskripsi: jasa.deskripsi,
-            tanggal: new Date().toLocaleDateString(),
-            pj:'',
-            modal: '',
-            addons: [],
+        firestore.collection('pembiayaan').add({
+            nama: pembiayaan.nama,
+            nominal: pembiayaan.nominal,
+            catatan: pembiayaan.catatan,
+            status: pembiayaan.status,
             toko
         })
         .then(() => {
@@ -39,7 +33,7 @@ export const addService = (jasa) => {
     }
 }
 
-export const editService = (jasa) => {
+export const editPayment = (pembiayaan) => {
     return (dispatch, getState, {
         getFirebase,
         getFirestore
@@ -51,12 +45,11 @@ export const editService = (jasa) => {
             loading: true
         })
 
-        firestore.collection('jasa').doc(jasa.id).set({
-            biaya: jasa.biaya,
-            status: jasa.status,
-            pj:jasa.pj,
-            modal: jasa.modal,
-            addons: jasa.addons,
+        firestore.collection('pembiayaan').doc(pembiayaan.id).set({
+            nama: pembiayaan.nama,
+            nominal: pembiayaan.nominal,
+            catatan: pembiayaan.catatan,
+            status: pembiayaan.status,
         })
         .then(() => {
             dispatch({
@@ -73,7 +66,7 @@ export const editService = (jasa) => {
     }
 }
 
-export const deleteService = (id) => {
+export const deletePayment = (id) => {
     return (dispatch, getState, {
         getFirebase,
         getFirestore
@@ -85,7 +78,7 @@ export const deleteService = (id) => {
             loading: true
         })
 
-        firestore.collection('jasa').doc(id).delete()
+        firestore.collection('pembiayaan').doc(id).delete()
         .then(() => {
             dispatch({
                 type: 'ADD_SUCCESS',
